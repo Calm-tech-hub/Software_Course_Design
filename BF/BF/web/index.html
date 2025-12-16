@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蜜蜂采蜜游戏 - 多轮对战平台</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部导航 -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🐝 蜜蜂采蜜游戏 - 多轮对战平台</h1>
+                <nav class="nav-tabs">
+                    <button class="tab-btn active" data-tab="battle">对战管理</button>
+                    <button class="tab-btn" data-tab="rankings">积分榜</button>
+                    <button class="tab-btn" data-tab="statistics">统计分析</button>
+                    <button class="tab-btn" data-tab="upload">算法上传</button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 对战管理页面 -->
+            <div id="battle-tab" class="tab-content active">
+                <div class="section-grid">
+                    <!-- 对战配置 -->
+                    <div class="card">
+                        <h2>🎯 启动对战</h2>
+                        <form id="battleForm" class="battle-form">
+                            <div class="form-group">
+                                <label for="groupA">组 A（蜜蜂/大黄蜂）</label>
+                                <select id="groupA" required>
+                                    <option value="">请选择...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="groupB">组 B（蜜蜂/大黄蜂）</label>
+                                <select id="groupB" required>
+                                    <option value="">请选择...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="rounds">每方向轮数</label>
+                                <input type="number" id="rounds" min="1" max="100" value="5" required>
+                                <small>双向对战总计: <span id="totalRounds">10</span> 局</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <span class="btn-icon">⚔️</span> 开始双向对战
+                            </button>
+                        </form>
+                        <div id="battleStatus" class="status-message"></div>
+                    </div>
+
+                    <!-- 最近对战记录 -->
+                    <div class="card">
+                        <h2>📜 最近对战记录</h2>
+                        <div class="records-list" id="recentRecords">
+                            <div class="loading">加载中...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 历史记录表格 -->
+                <div class="card full-width">
+                    <div class="card-header">
+                        <h2>📊 历史对局记录</h2>
+                        <button id="refreshRecords" class="btn btn-secondary">
+                            <span class="btn-icon">🔄</span> 刷新
+                        </button>
+                    </div>
+                    <div class="table-container">
+                        <table id="recordsTable" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>组1 (蜜蜂)</th>
+                                    <th>组2 (大黄蜂)</th>
+                                    <th>轮次</th>
+                                    <th>得分</th>
+                                    <th>花蜜</th>
+                                    <th>存活</th>
+                                    <th>时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recordsBody">
+                                <tr><td colspan="8" class="loading">加载中...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 积分榜页面 -->
+            <div id="rankings-tab" class="tab-content">
+                <div class="card full-width">
+                    <h2>🏆 组别排名榜</h2>
+                    <div class="rankings-grid" id="rankingsGrid">
+                        <div class="loading">加载中...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 统计分析页面 -->
+            <div id="statistics-tab" class="tab-content">
+                <div class="stats-overview">
+                    <div class="stat-card">
+                        <div class="stat-icon">🎮</div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="totalBattles">0</div>
+                            <div class="stat-label">总对局数</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="totalGroups">0</div>
+                            <div class="stat-label">参赛组数</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="avgScore">0</div>
+                            <div class="stat-label">平均得分</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card full-width">
+                    <h2>📊 最近对局得分趋势</h2>
+                    <canvas id="scoreChart" height="80"></canvas>
+                </div>
+            </div>
+
+            <!-- 算法上传页面 -->
+            <div id="upload-tab" class="tab-content">
+                <div class="card upload-card">
+                    <h2>📤 上传算法</h2>
+                    <form id="uploadForm" class="upload-form">
+                        <div class="form-group">
+                            <label for="groupId">组别ID</label>
+                            <input type="text" id="groupId" placeholder="例如: 001" required>
+                            <small>请输入3位数字编号</small>
+                        </div>
+                        
+                        <div class="upload-section">
+                            <div class="form-group">
+                                <label for="honeyBeeFile">HoneyBee.java</label>
+                                <div class="file-input-wrapper">
+                                    <input type="file" id="honeyBeeFile" accept=".java">
+                                    <span class="file-name">未选择文件</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="hornetFile">Hornet.java</label>
+                                <div class="file-input-wrapper">
+                                    <input type="file" id="hornetFile" accept=".java">
+                                    <span class="file-name">未选择文件</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <span class="btn-icon">✅</span> 上传并编译
+                        </button>
+                    </form>
+                    <div id="uploadStatus" class="status-message"></div>
+
+                    <div class="info-box">
+                        <h3>ℹ️ 使用说明</h3>
+                        <ul>
+                            <li>组别ID必须是3位数字（如001、123）</li>
+                            <li>必须上传HoneyBee.java和Hornet.java两个文件</li>
+                            <li>文件会自动编译，编译失败请检查代码</li>
+                            <li>上传成功后即可在对战中使用该组算法</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>蜜蜂采蜜游戏多轮对战平台 v2.0 | 软件课程设计项目</p>
+        </footer>
+    </div>
+
+    <!-- 引入Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>
