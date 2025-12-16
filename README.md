@@ -32,12 +32,6 @@
 
 ```bash
 cd /home/ubuntu22/Desktop/软件课设/BF/BF
-./start_web.sh
-```
-
-或者手动启动：
-
-```bash
 # 编译（首次）
 javac -encoding UTF-8 SimpleJSON.java WebServer.java
 
