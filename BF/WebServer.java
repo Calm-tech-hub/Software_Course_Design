@@ -64,7 +64,7 @@ public class WebServer {
             List<Map<String, Object>> groups = new ArrayList<>();
             
             // 扫描group/group目录
-            File groupDir = new File("../../group/group");
+            File groupDir = new File("../group");
             if (groupDir.exists() && groupDir.isDirectory()) {
                 File[] dirs = groupDir.listFiles(File::isDirectory);
                 if (dirs != null) {
@@ -499,7 +499,7 @@ public class WebServer {
                 }
                 
                 // 创建组目录
-                File groupDir = new File("../../group/group/" + groupId);
+                File groupDir = new File("../group" + groupId);
                 if (!groupDir.exists()) {
                     groupDir.mkdirs();
                     System.out.println("创建目录: " + groupDir.getAbsolutePath());
@@ -568,7 +568,7 @@ public class WebServer {
         }
         
         private String compileGroup(String groupId) throws Exception {
-            File groupDir = new File("../../group/group/" + groupId);
+            File groupDir = new File("../group" + groupId);
             File bfDir = new File(".").getAbsoluteFile();
             
             // 构建编译命令 - 使用绝对路径

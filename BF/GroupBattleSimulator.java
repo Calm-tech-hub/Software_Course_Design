@@ -11,7 +11,7 @@ public class GroupBattleSimulator {
     private String groupA;
     private String groupB;
     private int roundsPerSide;
-    private String groupBasePath = "../group/group";
+    private String groupBasePath = "../group";
     private String workDir = "battle_temp";
     
     public GroupBattleSimulator(String groupA, String groupB, int roundsPerSide) {
@@ -246,7 +246,7 @@ public class GroupBattleSimulator {
         } else {
             System.out.println("用法: java GroupBattleSimulator <组A> <组B> <每方向轮数>");
             System.out.println("示例: java GroupBattleSimulator 001 006 3");
-            System.out.println("\n注意: 组名对应 group/group/ 目录下的文件夹");
+            System.out.println("\n注意: 组名对应 group/ 目录下的文件夹");
         }
     }
 }

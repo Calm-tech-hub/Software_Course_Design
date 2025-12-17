@@ -6,7 +6,7 @@ import java.nio.file.*;
  */
 public class SimpleBattle {
     
-    private static final String GROUP_BASE = "../../group/group/";
+    private static final String GROUP_BASE = "../group";
     private static final String BF_BASE = "./";
     
     public static void main(String[] args) throws Exception {

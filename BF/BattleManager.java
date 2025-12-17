@@ -52,7 +52,7 @@ public class BattleManager extends JFrame {
         availableGroups.add("BF"); // 默认组
         
         // 扫描group/group目录
-        File groupDir = new File("../../group/group");
+        File groupDir = new File("../group");
         if (groupDir.exists() && groupDir.isDirectory()) {
             File[] dirs = groupDir.listFiles(File::isDirectory);
             if (dirs != null) {
@@ -68,7 +68,7 @@ public class BattleManager extends JFrame {
         }
         
         // 也扫描group目录（兼容）
-        groupDir = new File("../../group");
+        groupDir = new File("../group");
         if (groupDir.exists() && groupDir.isDirectory()) {
             File[] dirs = groupDir.listFiles(File::isDirectory);
             if (dirs != null) {
