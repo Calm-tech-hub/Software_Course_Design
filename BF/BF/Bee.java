@@ -14,21 +14,21 @@ public class Bee extends JPanel {
 	private static Toolkit tk = Toolkit.getDefaultToolkit();
     /**蜜蜂当前的坐标*/
 	private int id;
-	private Image img;//蜜蜂的图片
-	private int posX;
-	private int posY;
-	private boolean isAlive;
-	private FlyingStatus fs;
-	private int[] nextX;
-	private int[] nextY;  
+	protected Image img;//蜜蜂的图片,改为protected
+	protected int posX;  // 改为protected,允许子类访问
+	protected int posY;  // 改为protected,允许子类访问
+	protected boolean isAlive;  // 改为protected,允许子类访问
+	protected FlyingStatus fs;  // 改为protected,允许子类访问
+	protected int[] nextX;  // 改为protected,允许子类访问
+	protected int[] nextY;  // 改为protected,允许子类访问
 	String isCatched;
 	
 	/**蜜蜂的飞行速度*/
-	private int speed = 18;
+	protected int speed = 18;  // 改为protected,允许子类访问
 	//private int speed = 27;//@YQ原来的代码为18
 	
 	/**蜜蜂当前飞行方向和上一次方向，上一次方向用于限制转向范围*/
-	double angle,oldAngle;
+	protected double angle, oldAngle;  // 改为protected,允许子类访问
 	
 	/**蜜蜂的构造函数
 	* @param id 蜜蜂的ID

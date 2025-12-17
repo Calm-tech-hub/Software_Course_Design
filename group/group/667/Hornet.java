@@ -12,13 +12,13 @@ public class Hornet extends Bee{
 	int time = 0;
 	int ftime = 0;
 	boolean choose = false;
-	/**´Ë·½·¨ÊÇĞèÒªÖØĞ´µÄºËĞÄ´úÂë£¬ÃÛ·ä²ÉÃÛµÄÖ÷Òª¸öĞÔÔÚ´ËÀàÌåÏÖ*/
+	/**æ­¤æ–¹æ³•æ˜¯éœ€è¦é‡å†™çš„æ ¸å¿ƒä»£ç ï¼Œèœœèœ‚é‡‡èœœçš„ä¸»è¦ä¸ªæ€§åœ¨æ­¤ç±»ä½“ç°*/
 	public void search()
 	{
 		String strVision = BeeFarming.search(id);
 		
 		ftime ++;
-		//Óöµ½ÃÛ·ä£¬È·¶¨½Ç¶È²¢¸úËæ
+		//é‡åˆ°èœœèœ‚ï¼Œç¡®å®šè§’åº¦å¹¶è·Ÿéš
 		if(strVision.indexOf('+')!=-1)
 		{
 			time ++;
@@ -27,7 +27,7 @@ public class Hornet extends Bee{
 			String str1 = new String();
 			str1 = strVision.substring(inde1+1, inde2);
 			    
-			//·ÀÖ¹³öÏÖÍ¬Ê±¿´µ½Á½Ö»ÃÛ·äÎŞ·¨Ñ¡Ôñ½Ç¶ÈÇé¿ö
+			//é˜²æ­¢å‡ºç°åŒæ—¶çœ‹åˆ°ä¸¤åªèœœèœ‚æ— æ³•é€‰æ‹©è§’åº¦æƒ…å†µ
 			if(str1.contains("+"))
 			{
 				int ind1 = str1.indexOf('(');
@@ -35,12 +35,12 @@ public class Hornet extends Bee{
 	            str1 = str1.substring(ind1, ind2);
 			}
 			
-			//µ÷Õû½Ç¶È×¼±¸³ö»÷
+			//è°ƒæ•´è§’åº¦å‡†å¤‡å‡ºå‡»
 			int inde3 = str1.indexOf(',');
 			int inde4 = str1.lastIndexOf(',');
 			angle = Double.valueOf(str1.substring(inde3+1, inde4)).doubleValue();
 			
-			//»Æ·ä²»ÄÜ·ÅÆú
+			//é»„èœ‚ä¸èƒ½æ”¾å¼ƒ
 			/*if(time == 20)
 			{
 				angle = - angle ;
@@ -49,7 +49,7 @@ public class Hornet extends Bee{
 			ratoteImage(angle);
 		}
    
-		//¿´µ½»¨Ê±»Æ·äÏò»¨·É£¬ÒÔÑ°ÕÒÃÛ·ä
+		//çœ‹åˆ°èŠ±æ—¶é»„èœ‚å‘èŠ±é£ï¼Œä»¥å¯»æ‰¾èœœèœ‚
 		else if((strVision.indexOf('-')!=-1)&&(ftime ==5))
 		{
 			ftime =0;
@@ -68,14 +68,14 @@ public class Hornet extends Bee{
 				ratoteImage(angle);
 			}
 		}
-		//Ã»ÓĞÃÛ·ä,Ã»ÓĞ»¨£¬µ«Óöµ½Ç½
+		//æ²¡æœ‰èœœèœ‚,æ²¡æœ‰èŠ±ï¼Œä½†é‡åˆ°å¢™
 		else if(strVision.indexOf("*")!=-1)
 		{
 			Random ra = new Random();
 			angle += ra.nextInt(90);
 			ratoteImage(angle);
 		}
-		//ÎŞÃÛ·ä£¬ÎŞÇ½Çé¿ö
+		//æ— èœœèœ‚ï¼Œæ— å¢™æƒ…å†µ
 	
 	 else 
 		{
@@ -100,8 +100,8 @@ public class Hornet extends Bee{
 	}
 		
 
-	/**Èç¹û»Æ·ä×¥µ½ÁËÃÛ·ä£¬Ôòboolean dead==true£¬»Æ·ä¿ÉÒÔ¸ù¾İdeadµÄÖµÅĞ¶ÏÃÛ·äÖª·ñ±»É±ËÀ¡£
-	±¾·½·¨¿ÉÒÔĞŞ¸Ä£¬ÔÚBeeFarmingµÄkillBee·½·¨ÖĞµ±ÃÛ·ä±»»Æ·äÏûÃğºó½«±»µ÷ÓÃ*/
+	/**å¦‚æœé»„èœ‚æŠ“åˆ°äº†èœœèœ‚ï¼Œåˆ™boolean dead==trueï¼Œé»„èœ‚å¯ä»¥æ ¹æ®deadçš„å€¼åˆ¤æ–­èœœèœ‚çŸ¥å¦è¢«æ€æ­»ã€‚
+	æœ¬æ–¹æ³•å¯ä»¥ä¿®æ”¹ï¼Œåœ¨BeeFarmingçš„killBeeæ–¹æ³•ä¸­å½“èœœèœ‚è¢«é»„èœ‚æ¶ˆç­åå°†è¢«è°ƒç”¨*/
 	public boolean isCatched(){
 	    dead = true;
 	    return dead;

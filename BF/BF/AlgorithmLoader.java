@@ -4,12 +4,24 @@ import java.net.*;
 /**
  * 动态算法加载器
  * 用于从指定目录加载不同组的算法类
+ * 注意:必须打破双亲委派机制,否则会加载到BF目录的默认类
  */
 public class AlgorithmLoader extends ClassLoader {
     private String classPath;
     
     public AlgorithmLoader(String classPath) {
+        super(null);  // 传null打破双亲委派,不使用父类加载器
         this.classPath = classPath;
+    }
+    
+    @Override
+    public Class<?> loadClass(String name) throws ClassNotFoundException {
+        // 对于Honey Bee和Hornet,必须从指定目录加载
+        if (name.equals("HoneyBee") || name.equals("Hornet")) {
+            return findClass(name);
+        }
+        // 其他类(如java.lang.*)使用系统类加载器
+        return ClassLoader.getSystemClassLoader().loadClass(name);
     }
     
     @Override

@@ -399,16 +399,26 @@ public class WebServer {
         }
         
         private int countTotalGroups() {
+            // 统计实际参与过对战的组数
             Set<String> groups = new HashSet<>();
-            File groupDir = new File("../../group/group");
-            if (groupDir.exists() && groupDir.isDirectory()) {
-                File[] dirs = groupDir.listFiles(File::isDirectory);
-                if (dirs != null) {
-                    for (File dir : dirs) {
-                        groups.add(dir.getName());
+            File recordDir = new File("BattleRecords");
+            
+            if (recordDir.exists() && recordDir.isDirectory()) {
+                File[] files = recordDir.listFiles((dir, name) -> name.endsWith(".dat"));
+                if (files != null) {
+                    for (File file : files) {
+                        try {
+                            GameRecord record = GameRecord.loadFromFile(file.getAbsolutePath());
+                            // 提取组名
+                            String group = extractGroupName(record.group1);
+                            groups.add(group);
+                        } catch (Exception e) {
+                            // 跳过损坏的文件
+                        }
                     }
                 }
             }
+            
             return groups.size();
         }
         

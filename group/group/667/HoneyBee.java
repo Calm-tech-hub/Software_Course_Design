@@ -11,13 +11,13 @@ public class HoneyBee extends Bee{
 		this.id = id;
 	}
 	
-	/**´Ë·½·¨ÊÇĞèÒªÖØĞ´µÄºËĞÄ´úÂë£¬ÃÛ·ä²ÉÃÛµÄÖ÷Òª¸öĞÔÔÚ´ËÀàÌåÏÖ*/
+	/**æ­¤æ–¹æ³•æ˜¯éœ€è¦é‡å†™çš„æ ¸å¿ƒä»£ç ï¼Œèœœèœ‚é‡‡èœœçš„ä¸»è¦ä¸ªæ€§åœ¨æ­¤ç±»ä½“ç°*/
 	public void search(){
-		String strVision = BeeFarming.search(id); //·µ»ØÖµÎªresult£¬°üº¬ÁË
+		String strVision = BeeFarming.search(id); //è¿”å›å€¼ä¸ºresultï¼ŒåŒ…å«äº†
 		//System.out.println("ID="+id);
 		System.out.println(strVision);
 		
-		//µ±»Æ·äÊÓÒ°ÖĞÓĞ¸ÃÃÛ·äÊ±£¬ÃÛ·ä²»²ÉÃÛÇÒÓö»¨¶ã¿ª£¬ÓĞÒ»¶¨µÄ¼¸ÂÊÄÜË¦µô»Æ·ä
+		//å½“é»„èœ‚è§†é‡ä¸­æœ‰è¯¥èœœèœ‚æ—¶ï¼Œèœœèœ‚ä¸é‡‡èœœä¸”é‡èŠ±èº²å¼€ï¼Œæœ‰ä¸€å®šçš„å‡ ç‡èƒ½ç”©æ‰é»„èœ‚
 		int HorBeeId = getHornetVision();
 		//System.out.println("HorBeeId="+HorBeeId);
 		if(HorBeeId==id){
@@ -26,27 +26,27 @@ public class HoneyBee extends Bee{
 			}
 		}
 		
-		//Èç¹ûÅöµ½*ÎªÊ×µÄ×Ö·û´®£¬´ú±íÓöµ½ÁË±ß£¬ÕâÀïÊÇËæ»úË³Ê±ÕëĞı×ª90¶ÈÒÔÄÚµÄ½Ç¶È
+		//å¦‚æœç¢°åˆ°*ä¸ºé¦–çš„å­—ç¬¦ä¸²ï¼Œä»£è¡¨é‡åˆ°äº†è¾¹ï¼Œè¿™é‡Œæ˜¯éšæœºé¡ºæ—¶é’ˆæ—‹è½¬90åº¦ä»¥å†…çš„è§’åº¦
 		if(strVision.indexOf('*')==0)
 		{	
 			Random ra = new Random();
 			angle += ra.nextInt(90);
-			//angle+=80;    //¹Ì¶¨Ë³Ê±ÕëĞı×ª80¶È
+			//angle+=80;    //å›ºå®šé¡ºæ—¶é’ˆæ—‹è½¬80åº¦
 			ratoteImage(angle);
 		}
 		
-		//Èç¹ûÅöµ½-ÎªÊ×µÄ×Ö·û´®£¬´ú±íÓöµ½ÁË»¨£¬ÕÒ×¼½Ç¶ÈÇ°Íù²ÉÃÛ
+		//å¦‚æœç¢°åˆ°-ä¸ºé¦–çš„å­—ç¬¦ä¸²ï¼Œä»£è¡¨é‡åˆ°äº†èŠ±ï¼Œæ‰¾å‡†è§’åº¦å‰å¾€é‡‡èœœ
 		else if(strVision.indexOf('-')==0){
 			int inde1 = strVision.indexOf(',');
 			int inde2 = strVision.indexOf(')');
 			if(strVision.indexOf("ON")==-1){
-				angle = Double.valueOf(strVision.substring(inde1+1, inde2)).doubleValue();	//´ÓÖĞÈ¡³öangle²¢½«string×ª»¯Îªdouble
+				angle = Double.valueOf(strVision.substring(inde1+1, inde2)).doubleValue();	//ä»ä¸­å–å‡ºangleå¹¶å°†stringè½¬åŒ–ä¸ºdouble
 				ratoteImage(angle);
 			}
 			
 		}
 		
-		//Èç¹ûÅöµ½+ÎªÊ×µÄ×Ö·û´®£¬´ú±íÓöµ½ÁËÆäËûÃÛ·ä»òÕß»Æ·ä£¬ĞèÒª¶ã¿ª
+		//å¦‚æœç¢°åˆ°+ä¸ºé¦–çš„å­—ç¬¦ä¸²ï¼Œä»£è¡¨é‡åˆ°äº†å…¶ä»–èœœèœ‚æˆ–è€…é»„èœ‚ï¼Œéœ€è¦èº²å¼€
 		else if(strVision.indexOf('+')==0){
 			int inde1 = strVision.indexOf(',');
 		    int inde2 = strVision.indexOf(',',inde1+1);
@@ -67,14 +67,14 @@ public class HoneyBee extends Bee{
 		setXYs(0);
 	}
 	
-	/** µ±»Æ·äÔÚÃÛ·äµÄÊÓÒ°ÄÚ£¬´¦Àí¸ÃÎ£»ú*/
+	/** å½“é»„èœ‚åœ¨èœœèœ‚çš„è§†é‡å†…ï¼Œå¤„ç†è¯¥å±æœº*/
 	public boolean handleDanger(double angle){
 		isDanger = true;
 		ratoteImage(angle+45);
 		return false;
 	}
 	
-	/**Î±×°³É»Æ·ä²é¿´ÆäÊÓÒ°ÖĞÓĞÃ»ÓĞÃÛ·ä*/
+	/**ä¼ªè£…æˆé»„èœ‚æŸ¥çœ‹å…¶è§†é‡ä¸­æœ‰æ²¡æœ‰èœœèœ‚*/
 	public int getHornetVision(){
 		String HornetVision = BeeFarming.search(9);
 		int beeIdHor;

@@ -158,7 +158,10 @@ public class GameEngine {
         // 加载蜜蜂算法
         try {
             // 尝试多个可能的路径
-            File groupDir = new File("../group/group/" + honeyBeeGroup);
+            File groupDir = new File("../../group/group/" + honeyBeeGroup);
+            if (!groupDir.exists()) {
+                groupDir = new File("../group/group/" + honeyBeeGroup);
+            }
             if (!groupDir.exists()) {
                 groupDir = new File("../group/" + honeyBeeGroup);
             }
@@ -167,7 +170,7 @@ public class GameEngine {
                 // 使用自定义类加载器加载
                 AlgorithmLoader loader = new AlgorithmLoader(groupDir.getAbsolutePath());
                 honeyBeeClass = loader.loadClass("HoneyBee");
-                System.out.println("加载蜜蜂算法: " + honeyBeeGroup + "/HoneyBee");
+                System.out.println("✅ 加载蜜蜂算法: " + honeyBeeGroup + "/HoneyBee (路径: " + groupDir.getAbsolutePath() + ")");
             } else {
                 // 使用当前目录的默认类
                 honeyBeeClass = Class.forName("HoneyBee");
@@ -181,7 +184,10 @@ public class GameEngine {
         // 加载大黄蜂算法
         try {
             // 尝试多个可能的路径
-            File groupDir = new File("../group/group/" + hornetGroup);
+            File groupDir = new File("../../group/group/" + hornetGroup);
+            if (!groupDir.exists()) {
+                groupDir = new File("../group/group/" + hornetGroup);
+            }
             if (!groupDir.exists()) {
                 groupDir = new File("../group/" + hornetGroup);
             }
@@ -189,7 +195,7 @@ public class GameEngine {
             if (groupDir.exists() && !hornetGroup.equals("BF")) {
                 AlgorithmLoader loader = new AlgorithmLoader(groupDir.getAbsolutePath());
                 hornetClass = loader.loadClass("Hornet");
-                System.out.println("加载大黄蜂算法: " + hornetGroup + "/Hornet");
+                System.out.println("✅ 加载大黄蜂算法: " + hornetGroup + "/Hornet (路径: " + groupDir.getAbsolutePath() + ")");
             } else {
                 hornetClass = Class.forName("Hornet");
                 System.out.println("使用默认Hornet算法 (BF)");

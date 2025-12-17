@@ -36,6 +36,10 @@ public class HoneyBee extends Bee{
  }
 	/**此方法是需要重写的核心代码，蜜蜂采蜜的主要个性在此类体现*/
 	public void search(){
+		// ============ 验证日志：证明006组算法被调用 ============
+		System.out.println("🐝 [006组HoneyBee] search()方法被调用! ID=" + id);
+		// ========================================================
+		
 		 //Double jiaodu = BeeFarming.getVectorDegree(210,210,467,79) ; System.out.println("jiaodu "+jiaodu);
 	   //if(id == 0 && haha == 0){ratoteImage(340.9908043898101);haha = 1;System.out.println("已做好牺牲准备！！！！");}
 	  

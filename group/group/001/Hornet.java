@@ -25,6 +25,10 @@ public class Hornet extends Bee
 	
 	public void search()
 	{
+		// ============ 验证日志：证明001组算法被调用 ============
+		System.out.println("🦟 [001组Hornet] search()方法被调用! ID=" + id);
+		// ========================================================
+		
 		count++;
 		String strVision = BeeFarming.search(id);
 

@@ -1,10 +1,16 @@
 // ==================== 全局变量 ====================
-const API_BASE = 'http://localhost:8080/api';
+// 自动检测：如果是从外部访问，使用当前主机地址；如果是localhost访问，使用localhost
+const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+    ? 'http://localhost:8080/api' 
+    : `http://${window.location.hostname}:8080/api`;
 let currentTab = 'battle';
 let battleChart = null;
 
+console.log('🚀 app.js 已加载，API_BASE:', API_BASE);
+
 // ==================== 页面加载 ====================
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('📄 DOM 加载完成，开始初始化');
     initTabs();
     initBattleForm();
     initUploadForm();
@@ -12,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadRecords();
     loadRankings();
     loadStatistics();
+    console.log('✅ 所有初始化函数已调用');
     
     // 设置定时刷新
     setInterval(loadRecords, 10000); // 每10秒刷新记录
@@ -237,9 +244,12 @@ function showBattleResult(result) {
 
 // ==================== 加载对战记录 ====================
 async function loadRecords() {
+    console.log('📥 loadRecords 被调用');
     try {
         const response = await fetch(`${API_BASE}/records`);
+        console.log('📊 API响应状态:', response.status);
         const records = await response.json();
+        console.log(`✅ 获取到 ${records.length} 条记录`, records[0]);
         
         // 更新最近记录
         updateRecentRecords(records.slice(0, 5));
@@ -247,7 +257,7 @@ async function loadRecords() {
         // 更新表格
         updateRecordsTable(records);
     } catch (error) {
-        console.error('加载记录失败:', error);
+        console.error('❌ 加载记录失败:', error);
     }
 }
 

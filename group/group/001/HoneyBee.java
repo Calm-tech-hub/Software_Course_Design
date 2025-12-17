@@ -21,6 +21,10 @@ public class HoneyBee extends Bee
 	/**此方法是需要重写的核心代码，蜜蜂采蜜的主要个性在此类体现*/
 	public void search()
 	{
+		// ============ 验证日志：证明001组算法被调用 ============
+		System.out.println("🐝 [001组HoneyBee] search()方法被调用! ID=" + id);
+		// ========================================================
+		
 		String strVision = BeeFarming.search(id);
 		
 		if (strVision.length() != 0)
